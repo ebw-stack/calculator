@@ -113,33 +113,7 @@
         .result.red { color: red; }
         .result.blue { color: blue; }
         .result.gray { color: #999; font-size: 12px; white-space: normal; }
-        .nav {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-        .nav a {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: bold;
-            border: 1px solid #ddd;
-            color: #555;
-            background-color: #f8f8f8;
-            transition: background-color 0.2s;
-        }
-        .nav a.active {
-            background-color: #007bff;
-            color: white;
-            border-color: #007bff;
-        }
-        .nav a:not(.active):hover {
-            background-color: #e9ecef;
-        }
-        .reset-button {
+.reset-button {
             background-color: #dc3545;
             color: white;
             border: none;
@@ -160,8 +134,6 @@
 <body>
     <div class="container">
         <h1>구매대행 마진 계산기</h1>
-
-        <div class="nav" id="nav"></div>
 
         <!-- 환율 설정 -->
         <div class="section settings">
@@ -261,7 +233,6 @@
 
     </div>
 
-    <script src="js/nav.js?v=1"></script>
     <script src="js/data.js?v=1"></script>
     <script src="js/utils.js?v=1"></script>
     <script src="js/calculator.js?v=1"></script>
