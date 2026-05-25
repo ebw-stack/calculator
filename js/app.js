@@ -1,3 +1,25 @@
+const RATE_KEYS = ["jpRate", "usRate", "deRate", "ukRate"];
+
+function saveRates() {
+    const rates = {};
+    RATE_KEYS.forEach(id => {
+        rates[id] = document.getElementById(id).value;
+    });
+    localStorage.setItem("savedRates", JSON.stringify(rates));
+}
+
+function loadRates() {
+    const saved = localStorage.getItem("savedRates");
+    if (!saved) return;
+    const rates = JSON.parse(saved);
+    RATE_KEYS.forEach(id => {
+        const el = document.getElementById(id);
+        if (rates[id] && el.querySelector('option[value="' + rates[id] + '"]')) {
+            el.value = rates[id];
+        }
+    });
+}
+
 function populateSelect(el, start, end, step) {
     const placeholder = document.createElement("option");
     placeholder.value = "";
@@ -38,6 +60,12 @@ function initDropdowns() {
         opt.textContent = (i / 10).toFixed(2);
         jpRateEl.appendChild(opt);
     }
+
+    loadRates();
+
+    RATE_KEYS.forEach(id => {
+        document.getElementById(id).addEventListener("change", saveRates);
+    });
 }
 
 function resetFields() {
