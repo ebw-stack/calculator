@@ -78,8 +78,26 @@ function calculateUK() {
     showResult("ukResult", "ukRate2", profit, sellingPrice);
 }
 
+function calculateJP() {
+    const sellingPrice = getSellingPrice();
+    const localPrice = parseFloat(document.getElementById("jpPrice").value);
+    const exchangeRate = parseFloat(document.getElementById("jpRate").value);
+    const quantity = parseInt(document.getElementById("jpQty").value) || 1;
+    const resultEl = document.getElementById("jpResult");
+
+    if (!sellingPrice || isNaN(localPrice) || isNaN(exchangeRate)) {
+        resultEl.textContent = "";
+        return;
+    }
+
+    const totalLocalPrice = localPrice * quantity;
+    const profit = Math.round(sellingPrice * 0.96 - (totalLocalPrice * exchangeRate * 1.022));
+    showResult("jpResult", "jpRate2", profit, sellingPrice);
+}
+
 function calculateAll() {
     calculateUS();
     calculateDE();
     calculateUK();
+    calculateJP();
 }
