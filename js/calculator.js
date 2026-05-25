@@ -91,7 +91,8 @@ function calculateJP() {
     }
 
     const totalLocalPrice = localPrice * quantity;
-    const profit = Math.round(sellingPrice * 0.96 - (totalLocalPrice * exchangeRate * 1.022));
+    const shippingFee = 10000;
+    const profit = Math.round(sellingPrice * 0.96 - (totalLocalPrice * exchangeRate * 1.022) - shippingFee);
     showResult("jpResult", "jpRate2", profit, sellingPrice);
 }
 
