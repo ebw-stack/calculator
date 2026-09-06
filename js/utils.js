@@ -57,3 +57,13 @@ function showResult(elId, rateElId, profit, sellingPrice) {
         rateEl.className = "margin-rate " + color;
     }
 }
+
+function clearResult(elId, rateElId, message) {
+    const el = document.getElementById(elId);
+    const rateEl = document.getElementById(rateElId);
+
+    el.textContent = message || "";
+    el.className = message ? "result gray" : "result";
+    rateEl.textContent = "";
+    rateEl.className = "margin-rate";
+}

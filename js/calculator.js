@@ -1,20 +1,24 @@
+const RATE_NOTICE = "환율을 선택하세요";
+
 function calculateUS() {
     const sellingPrice = getSellingPrice();
     const localPrice = parseFloat(document.getElementById("usPrice").value);
     const exchangeRate = parseFloat(document.getElementById("usRate").value);
     const weight = getWeight();
     const quantity = parseInt(document.getElementById("usQty").value) || 1;
-    const resultEl = document.getElementById("usResult");
 
     if (!sellingPrice || isNaN(localPrice) || isNaN(weight)) {
-        resultEl.textContent = "";
+        clearResult("usResult", "usRate2", "");
+        return;
+    }
+    if (isNaN(exchangeRate)) {
+        clearResult("usResult", "usRate2", RATE_NOTICE);
         return;
     }
 
     const shippingFee = getShippingFee(usShippingFees, weight);
     if (shippingFee === null) {
-        resultEl.textContent = "무게 초과 (미국 최대 20.0kg)";
-        resultEl.className = "result gray";
+        clearResult("usResult", "usRate2", "무게 초과 (미국 최대 20.0kg)");
         return;
     }
 
@@ -30,17 +34,19 @@ function calculateDE() {
     const exchangeRate = parseFloat(document.getElementById("deRate").value);
     const weight = getWeight();
     const quantity = parseInt(document.getElementById("deQty").value) || 1;
-    const resultEl = document.getElementById("deResult");
 
     if (!sellingPrice || isNaN(localPrice) || isNaN(weight)) {
-        resultEl.textContent = "";
+        clearResult("deResult", "deRate2", "");
+        return;
+    }
+    if (isNaN(exchangeRate)) {
+        clearResult("deResult", "deRate2", RATE_NOTICE);
         return;
     }
 
     const shippingCost = getShippingFee(deShippingFees, weight);
     if (shippingCost === null) {
-        resultEl.textContent = "무게 초과 (독일 최대 30.0kg)";
-        resultEl.className = "result gray";
+        clearResult("deResult", "deRate2", "무게 초과 (독일 최대 30.0kg)");
         return;
     }
 
@@ -57,17 +63,19 @@ function calculateUK() {
     const exchangeRate = parseFloat(document.getElementById("ukRate").value);
     const weight = getWeight();
     const quantity = parseInt(document.getElementById("ukQty").value) || 1;
-    const resultEl = document.getElementById("ukResult");
 
     if (!sellingPrice || isNaN(localPrice) || isNaN(weight)) {
-        resultEl.textContent = "";
+        clearResult("ukResult", "ukRate2", "");
+        return;
+    }
+    if (isNaN(exchangeRate)) {
+        clearResult("ukResult", "ukRate2", RATE_NOTICE);
         return;
     }
 
     const shippingCost = getShippingFee(ukShippingFees, weight);
     if (shippingCost === null) {
-        resultEl.textContent = "무게 초과 (영국 최대 30.0kg)";
-        resultEl.className = "result gray";
+        clearResult("ukResult", "ukRate2", "무게 초과 (영국 최대 30.0kg)");
         return;
     }
 
@@ -83,10 +91,13 @@ function calculateJP() {
     const localPrice = parseFloat(document.getElementById("jpPrice").value);
     const exchangeRate = parseFloat(document.getElementById("jpRate").value);
     const quantity = parseInt(document.getElementById("jpQty").value) || 1;
-    const resultEl = document.getElementById("jpResult");
 
-    if (!sellingPrice || isNaN(localPrice) || isNaN(exchangeRate)) {
-        resultEl.textContent = "";
+    if (!sellingPrice || isNaN(localPrice)) {
+        clearResult("jpResult", "jpRate2", "");
+        return;
+    }
+    if (isNaN(exchangeRate)) {
+        clearResult("jpResult", "jpRate2", RATE_NOTICE);
         return;
     }
 
